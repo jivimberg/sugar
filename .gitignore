@@ -5,5 +5,10 @@ library/.project
 library/.classpath
 library/library.iml
 library/.gradle
+build/
 *.class
+*.iml
+local.properties
+.idea/
+.gradle/
 .DS_Store
