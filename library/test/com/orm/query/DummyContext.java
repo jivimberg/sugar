@@ -19,7 +19,7 @@ import android.view.Display;
 
 import java.io.*;
 
-public class DummyContext extends Context{
+public abstract  class DummyContext extends Context{
     @Override
     public AssetManager getAssets() {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
