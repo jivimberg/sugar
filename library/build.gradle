@@ -5,14 +5,13 @@ buildscript {
 
         dependencies {
             classpath 'com.android.tools.build:gradle:1.0.0'
-            classpath 'com.github.jcandksolutions.gradle:android-unit-test:2.1.1'
         }
     }
 
     apply plugin: 'com.android.library'
 
 dependencies {
-    compile 'junit:junit:4.10'
+    compile 'junit:junit:4.8.+'
     compile 'com.android.support:support-v4:19.0.1'
 }
 

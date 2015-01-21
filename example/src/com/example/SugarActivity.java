@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.orm.SugarRecord;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import static com.orm.SugarRecord.save;
 
 public class SugarActivity extends Activity
