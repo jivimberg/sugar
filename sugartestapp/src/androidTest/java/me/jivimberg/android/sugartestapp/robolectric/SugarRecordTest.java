@@ -13,6 +13,7 @@ import java.util.List;
 
 import me.jivimberg.android.sugartestapp.model.Contact;
 import me.jivimberg.android.sugartestapp.model.Project;
+import me.jivimberg.android.sugartestapp.model.ProjectExtending;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -66,6 +67,17 @@ public class SugarRecordTest {
         SugarRecord.save(project);
 
         Project retrievedProject = SugarRecord.findById(Project.class, 1);
+        assertNotNull(project);
+        assertEquals(retrievedProject.getName(), projectName);
+    }
+
+    @Test
+    public void findByIdOverloaded() {
+        String projectName = "Title";
+        ProjectExtending project = new ProjectExtending(projectName);
+        ProjectExtending.save(project);
+
+        ProjectExtending retrievedProject = ProjectExtending.findById(1L);
         assertNotNull(project);
         assertEquals(retrievedProject.getName(), projectName);
     }
