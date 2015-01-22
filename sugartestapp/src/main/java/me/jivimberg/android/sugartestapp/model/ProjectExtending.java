@@ -17,6 +17,10 @@ public class ProjectExtending extends SugarRecord {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public static ProjectExtending findById(Long id) {
         return findById(ProjectExtending.class, id);
     }

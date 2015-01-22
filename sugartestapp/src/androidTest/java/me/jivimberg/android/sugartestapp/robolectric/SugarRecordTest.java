@@ -67,7 +67,7 @@ public class SugarRecordTest {
         SugarRecord.save(project);
 
         Project retrievedProject = SugarRecord.findById(Project.class, 1);
-        assertNotNull(project);
+        assertNotNull(retrievedProject);
         assertEquals(retrievedProject.getName(), projectName);
     }
 
@@ -78,7 +78,25 @@ public class SugarRecordTest {
         ProjectExtending.save(project);
 
         ProjectExtending retrievedProject = ProjectExtending.findById(1L);
-        assertNotNull(project);
+        assertNotNull(retrievedProject);
         assertEquals(retrievedProject.getName(), projectName);
+        assertEquals(1L, retrievedProject.getId().doubleValue(), 0.001);
+    }
+
+    @Test
+    public void saveSetId() {
+        String projectName = "Title";
+        ProjectExtending project = new ProjectExtending(projectName);
+        ProjectExtending.save(project);
+
+        String newName = "newName";
+        project.setName(newName);
+        ProjectExtending.save(project);
+
+        List<ProjectExtending> projects = Select.from(ProjectExtending.class).list();
+        assertNotNull(projects);
+        assertEquals(1, projects.size());
+
+//        assertEquals(1L, project.getId().doubleValue(), 0.001);
     }
 }
