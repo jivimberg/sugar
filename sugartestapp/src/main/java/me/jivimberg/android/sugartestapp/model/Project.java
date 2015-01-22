@@ -8,11 +8,11 @@ import com.orm.dsl.Table;
 public class Project {
     @Column(name = "projectId", unique = true, notNull = true)
     private int id;
-    @NotNull private String title;
+    @NotNull private String name;
 
-    public Project(int id, String title) {
+    public Project(int id, String name) {
         this.id = id;
-        this.title = title;
+        this.name = name;
     }
 
     public Project() {
@@ -22,8 +22,8 @@ public class Project {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Project {
         Project project = (Project) o;
 
         if (id != project.id) return false;
-        if (title != null ? !title.equals(project.title) : project.title != null) return false;
+        if (name != null ? !name.equals(project.name) : project.name != null) return false;
 
         return true;
     }
@@ -42,7 +42,7 @@ public class Project {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
 
@@ -50,7 +50,7 @@ public class Project {
     public String toString() {
         return "Project{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

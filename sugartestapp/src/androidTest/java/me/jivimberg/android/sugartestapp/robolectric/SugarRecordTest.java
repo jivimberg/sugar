@@ -46,7 +46,7 @@ public class SugarRecordTest {
         List<Project> projects = Select.from(Project.class).list();
         assertNotNull(projects);
         assertEquals(1, projects.size());
-        assertEquals(projects.iterator().next().getTitle(), firstProjectTitle);
+        assertEquals(projects.iterator().next().getName(), firstProjectTitle);
 
         String secondProjectTitle = "SecondTitle";
         project = new Project(1, secondProjectTitle);
@@ -56,6 +56,17 @@ public class SugarRecordTest {
         projects = Select.from(Project.class).list();
         assertNotNull(projects);
         assertEquals(1, projects.size());
-        assertEquals(projects.iterator().next().getTitle(), secondProjectTitle);
+        assertEquals(projects.iterator().next().getName(), secondProjectTitle);
+    }
+
+    @Test
+    public void findById() {
+        String projectName = "Title";
+        Project project = new Project(5, projectName);
+        SugarRecord.save(project);
+
+        Project retrievedProject = SugarRecord.findById(Project.class, 1);
+        assertNotNull(project);
+        assertEquals(retrievedProject.getName(), projectName);
     }
 }
