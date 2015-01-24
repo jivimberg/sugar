@@ -28,8 +28,13 @@ public class SugarRecordTest {
 
     @After
     public void cleanup(){
+        SugarRecord.deleteAll(Category.class);
         SugarRecord.deleteAll(Contact.class);
         SugarRecord.deleteAll(Project.class);
+        SugarRecord.deleteAll(SubCategory.class);
+        SugarRecord.deleteAll(CategoryExtending.class);
+        SugarRecord.deleteAll(ProjectExtending.class);
+        SugarRecord.deleteAll(SubCategoryExtending.class);
     }
 
     @Test
