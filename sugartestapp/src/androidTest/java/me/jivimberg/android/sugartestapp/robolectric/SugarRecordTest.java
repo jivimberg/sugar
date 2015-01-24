@@ -11,9 +11,11 @@ import org.robolectric.annotation.Config;
 
 import java.util.List;
 
+import me.jivimberg.android.sugartestapp.model.Category;
 import me.jivimberg.android.sugartestapp.model.Contact;
 import me.jivimberg.android.sugartestapp.model.Project;
 import me.jivimberg.android.sugartestapp.model.ProjectExtending;
+import me.jivimberg.android.sugartestapp.model.SubCategory;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -83,6 +85,7 @@ public class SugarRecordTest {
         assertEquals(1L, retrievedProject.getId().doubleValue(), 0.001);
     }
 
+    // Issue #201
     @Test
     public void saveSetId() {
         String projectName = "Title";
@@ -97,6 +100,23 @@ public class SugarRecordTest {
         assertNotNull(projects);
         assertEquals(1, projects.size());
 
-//        assertEquals(1L, project.getId().doubleValue(), 0.001);
+        assertEquals(1L, project.getId().doubleValue(), 0.001);
+    }
+
+    // Issue #215
+    @Test
+    public void persistingRelationships() {
+        String name = "Name";
+        Category category = new Category(name);
+        category.save();
+
+        SubCategory subCategory = new SubCategory(category);
+        subCategory.save();
+
+        List<SubCategory> subCategoryList = Select.from(SubCategory.class).list();
+        assertNotNull(subCategoryList);
+        assertEquals(1, subCategoryList.size());
+
+        assertNotNull(subCategoryList.iterator().next().getCategory());
     }
 }
