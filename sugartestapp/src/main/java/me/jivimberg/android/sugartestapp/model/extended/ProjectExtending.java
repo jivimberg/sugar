@@ -1,4 +1,4 @@
-package me.jivimberg.android.sugartestapp.model;
+package me.jivimberg.android.sugartestapp.model.extended;
 
 import com.orm.SugarRecord;
 import com.orm.dsl.NotNull;

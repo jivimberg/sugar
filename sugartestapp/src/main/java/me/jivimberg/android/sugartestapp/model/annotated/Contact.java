@@ -1,4 +1,4 @@
-package me.jivimberg.android.sugartestapp.model;
+package me.jivimberg.android.sugartestapp.model.annotated;
 
 import com.orm.dsl.NotNull;
 import com.orm.dsl.Table;

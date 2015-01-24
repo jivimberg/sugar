@@ -11,11 +11,13 @@ import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-import me.jivimberg.android.sugartestapp.model.Category;
-import me.jivimberg.android.sugartestapp.model.Contact;
-import me.jivimberg.android.sugartestapp.model.Project;
-import me.jivimberg.android.sugartestapp.model.ProjectExtending;
-import me.jivimberg.android.sugartestapp.model.SubCategory;
+import me.jivimberg.android.sugartestapp.model.annotated.Category;
+import me.jivimberg.android.sugartestapp.model.annotated.Contact;
+import me.jivimberg.android.sugartestapp.model.annotated.Project;
+import me.jivimberg.android.sugartestapp.model.extended.CategoryExtending;
+import me.jivimberg.android.sugartestapp.model.extended.ProjectExtending;
+import me.jivimberg.android.sugartestapp.model.annotated.SubCategory;
+import me.jivimberg.android.sugartestapp.model.extended.SubCategoryExtending;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -114,6 +116,23 @@ public class SugarRecordTest {
         subCategory.save();
 
         List<SubCategory> subCategoryList = Select.from(SubCategory.class).list();
+        assertNotNull(subCategoryList);
+        assertEquals(1, subCategoryList.size());
+
+        assertNotNull(subCategoryList.iterator().next().getCategory());
+    }
+
+    // Issue #215
+    @Test
+    public void persistingRelationshipsExtending() {
+        String name = "Name";
+        CategoryExtending category = new CategoryExtending(name);
+        category.save();
+
+        SubCategoryExtending subCategory = new SubCategoryExtending(category);
+        subCategory.save();
+
+        List<SubCategoryExtending> subCategoryList = Select.from(SubCategoryExtending.class).list();
         assertNotNull(subCategoryList);
         assertEquals(1, subCategoryList.size());
 

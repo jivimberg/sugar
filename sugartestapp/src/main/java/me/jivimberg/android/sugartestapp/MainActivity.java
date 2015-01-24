@@ -7,7 +7,7 @@ import com.orm.query.Select;
 
 import java.util.List;
 
-import me.jivimberg.android.sugartestapp.model.Contact;
+import me.jivimberg.android.sugartestapp.model.annotated.Contact;
 
 
 public class MainActivity extends ListActivity {
