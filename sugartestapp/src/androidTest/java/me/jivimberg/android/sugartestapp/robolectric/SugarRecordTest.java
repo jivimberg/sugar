@@ -11,9 +11,11 @@ import org.robolectric.annotation.Config;
 
 import java.util.List;
 
+import me.jivimberg.android.sugartestapp.model.annotated.Car;
 import me.jivimberg.android.sugartestapp.model.annotated.Category;
 import me.jivimberg.android.sugartestapp.model.annotated.Contact;
 import me.jivimberg.android.sugartestapp.model.annotated.Project;
+import me.jivimberg.android.sugartestapp.model.extended.CarExtending;
 import me.jivimberg.android.sugartestapp.model.extended.CategoryExtending;
 import me.jivimberg.android.sugartestapp.model.extended.ProjectExtending;
 import me.jivimberg.android.sugartestapp.model.annotated.SubCategory;
@@ -35,6 +37,8 @@ public class SugarRecordTest {
         SugarRecord.deleteAll(CategoryExtending.class);
         SugarRecord.deleteAll(ProjectExtending.class);
         SugarRecord.deleteAll(SubCategoryExtending.class);
+        SugarRecord.deleteAll(Car.class);
+        SugarRecord.deleteAll(CarExtending.class);
     }
 
     @Test
@@ -43,6 +47,28 @@ public class SugarRecordTest {
         SugarRecord.save(contact);
 
         List<Contact> contacts = Select.from(Contact.class).list();
+        assertNotNull(contacts);
+        assertEquals(1, contacts.size());
+    }
+
+    // Issue #213
+    @Test
+    public void testInsertWithUnderlinedField() {
+        Car contact = new Car("Nissan");
+        SugarRecord.save(contact);
+
+        List<Car> contacts = Select.from(Car.class).list();
+        assertNotNull(contacts);
+        assertEquals(1, contacts.size());
+    }
+
+    // Issue #213
+    @Test
+    public void testInsertWithUnderlinedFieldExtending() {
+        CarExtending contact = new CarExtending("Nissan");
+        SugarRecord.save(contact);
+
+        List<CarExtending> contacts = Select.from(CarExtending.class).list();
         assertNotNull(contacts);
         assertEquals(1, contacts.size());
     }
@@ -115,10 +141,10 @@ public class SugarRecordTest {
     public void persistingRelationships() {
         String name = "Name";
         Category category = new Category(name);
-        category.save();
+        SugarRecord.save(category);
 
         SubCategory subCategory = new SubCategory(category);
-        subCategory.save();
+        SugarRecord.save(subCategory);
 
         List<SubCategory> subCategoryList = Select.from(SubCategory.class).list();
         assertNotNull(subCategoryList);

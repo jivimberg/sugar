@@ -4,7 +4,7 @@ import com.orm.SugarRecord;
 import com.orm.dsl.Table;
 
 @Table(name = "subcategory")
-public class SubCategory extends SugarRecord {
+public class SubCategory {
     private Category category;
 
     public SubCategory(){
