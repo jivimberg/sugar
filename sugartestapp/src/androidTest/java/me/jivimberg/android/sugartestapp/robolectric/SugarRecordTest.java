@@ -51,6 +51,40 @@ public class SugarRecordTest {
         assertEquals(1, contacts.size());
     }
 
+    @Test
+    public void testAnnotationMultipleSave() {
+        Car car = new Car("Nissan");
+        SugarRecord.save(car);
+
+        List<Car> carList = Select.from(Car.class).list();
+        assertNotNull(carList);
+        assertEquals(1, carList.size());
+
+        car.setName("Honda");
+        SugarRecord.save(car);
+
+        carList = Select.from(Car.class).list();
+        assertNotNull(carList);
+        assertEquals(1, carList.size());
+    }
+
+    @Test
+    public void testExtendingMultipleSave() {
+        CarExtending carExtending = new CarExtending("Nissan");
+        carExtending.save();
+
+        List<CarExtending> carExtendingList = Select.from(CarExtending.class).list();
+        assertNotNull(carExtendingList);
+        assertEquals(1, carExtendingList.size());
+
+        carExtending.setName("Honda");
+        carExtending.save();
+
+        carExtendingList = Select.from(CarExtending.class).list();
+        assertNotNull(carExtendingList);
+        assertEquals(1, carExtendingList.size());
+    }
+
     // Issue #213
     @Test
     public void testInsertWithUnderlinedField() {

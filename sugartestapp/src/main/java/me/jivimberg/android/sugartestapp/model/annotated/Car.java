@@ -18,4 +18,8 @@ public class Car {
     public String getName() {
         return car_name;
     }
+
+    public void setName(String car_name) {
+        this.car_name = car_name;
+    }
 }
