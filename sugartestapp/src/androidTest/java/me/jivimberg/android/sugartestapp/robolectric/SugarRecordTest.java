@@ -52,6 +52,29 @@ public class SugarRecordTest {
     }
 
     @Test
+    public void testUpdateAnnotated() {
+        String firstProjectTitle = "FirstTitle";
+        Project project = new Project(1, firstProjectTitle);
+        SugarRecord.save(project);
+
+        List<Project> projects = Select.from(Project.class).list();
+        assertNotNull(projects);
+        assertEquals(1, projects.size());
+
+        Project projectToUpdate = projects.iterator().next();
+        assertEquals(projectToUpdate.getName(), firstProjectTitle);
+
+        String secondProjectTitle = "SecondTitle";
+        projectToUpdate.setName(secondProjectTitle);
+        SugarRecord.save(projectToUpdate);
+
+        projects = Select.from(Project.class).list();
+        assertNotNull(projects);
+        assertEquals(1, projects.size());
+        assertEquals(projectToUpdate.getName(), secondProjectTitle);
+    }
+
+    @Test
     public void testAnnotationMultipleSave() {
         Car car = new Car("Nissan");
         SugarRecord.save(car);
