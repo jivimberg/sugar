@@ -226,4 +226,42 @@ public class SugarRecordTest {
 
         assertNotNull(subCategoryList.iterator().next().getCategory());
     }
+
+    // Issue #250
+    @Test
+    public void deleteAllAndSave() {
+        String name = "Name";
+        Category category = new Category(name);
+        SugarRecord.save(category);
+
+        List<Category> categoryList = Select.from(Category.class).list();
+        assertNotNull(categoryList);
+        assertEquals(1, categoryList.size());
+
+        SugarRecord.deleteAll(Category.class);
+        SugarRecord.save(category);
+
+        List<Category> categoryListAfterDelete = Select.from(Category.class).list();
+        assertNotNull(categoryListAfterDelete);
+        assertEquals(1, categoryListAfterDelete.size());
+    }
+
+    // Issue #250
+    @Test
+    public void deleteAllAndSaveExtending() {
+        String name = "Name";
+        CategoryExtending category = new CategoryExtending(name);
+        SugarRecord.save(category);
+
+        List<CategoryExtending> categoryList = Select.from(CategoryExtending.class).list();
+        assertNotNull(categoryList);
+        assertEquals(1, categoryList.size());
+
+        SugarRecord.deleteAll(CategoryExtending.class);
+        SugarRecord.save(category);
+
+        List<CategoryExtending> categoryListAfterDelete = Select.from(CategoryExtending.class).list();
+        assertNotNull(categoryListAfterDelete);
+        assertEquals(1, categoryListAfterDelete.size());
+    }
 }
