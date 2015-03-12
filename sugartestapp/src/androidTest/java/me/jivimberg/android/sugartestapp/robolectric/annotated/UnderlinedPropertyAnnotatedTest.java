@@ -4,6 +4,7 @@ import com.orm.SugarRecord;
 import com.orm.dsl.NotNull;
 import com.orm.query.Select;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -40,5 +41,11 @@ public class UnderlinedPropertyAnnotatedTest extends SugarAbstractCRUDTestCase<U
         List<UnderlinedPropertyNameExtended> contacts = Select.from(UnderlinedPropertyNameExtended.class).list();
         assertNotNull(contacts);
         assertEquals(1, contacts.size());
+    }
+
+    @Ignore //Waiting for #254 to be merged
+    @Test
+    public void testUpdate() {
+
     }
 }

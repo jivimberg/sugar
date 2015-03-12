@@ -4,6 +4,7 @@ import com.orm.SugarRecord;
 import com.orm.dsl.NotNull;
 import com.orm.query.Select;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -48,5 +49,11 @@ public class RelationshipAnnotatedTest extends SugarAbstractCRUDTestCase<ParentA
         assertEquals(1, childAnnotatedList.size());
 
         assertNotNull(childAnnotatedList.iterator().next().getParent());
+    }
+
+    @Ignore //Waiting for #254 to be merged
+    @Test
+    public void testUpdate() {
+
     }
 }
